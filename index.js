@@ -29,6 +29,38 @@ let lameJoke = [
   }
 ];
 
+app.get('/jokebook/categories', function (req, res) {
+  res.type('text');
+  res.send(getCategories());
+});
+
+app.get('/jokebook/joke/:category', function (req, res) {
+  if(req.params['category'] === 'funnyJoke' || req.params['category'] === 'lameJoke') {
+    res.json(getJokes(req.params['category']));
+  } else {
+    res.status(400).json({'error': 'no category listed for ' + req.params['category']});
+  }
+});
+
+function getCategories() {
+  let result = '';
+  for (let i = 0; i < categories.length; i++) {
+    result+= 'A possible category is ' +  categories[i] + '\n';
+  }
+  return result;
+}
+
+function getJokes(category) {
+  let number = 0;
+  if (category === 'funnyJoke') {
+    number = funnyJoke.length;
+    return funnyJoke[Math.floor(Math.random() * number)];
+  } else {
+    number = lameJoke.length;
+    return lameJoke[Math.floor(Math.random() * number)];
+  }
+}
+
 app.use(express.static('public'));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
