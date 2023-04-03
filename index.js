@@ -43,7 +43,9 @@ let lameJoke = [
 
 app.get('/jokebook/categories', function (req, res) {
   res.type('text');
-  res.send(getCategories());
+  //res.send(getCategories());
+  res.json(categories);
+  
 });
 
 app.get('/jokebook/joke/:category', function (req, res) {
@@ -54,13 +56,13 @@ app.get('/jokebook/joke/:category', function (req, res) {
   }
 });
 
-function getCategories() {
-  let result = '';
-  for (let i = 0; i < categories.length; i++) {
-    result+= 'A possible category is ' +  categories[i] + '\n';
-  }
-  return result;
-}
+//function getCategories() {
+//  let result = '';
+//  for (let i = 0; i < categories.length; i++) {
+//    result+= 'A possible category is ' +  categories[i] + '\n';
+//    }
+//  return result;
+//}
 
 function getJokes(category) {
   let number = 0;
