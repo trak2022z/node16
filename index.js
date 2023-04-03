@@ -1,7 +1,19 @@
 'use strict';
 
+
+
+
 const express = require('express');
 const app = express();
+
+app.use((req, res, next) => {
+  //res.setHeader('Access-Control-Allow-Origin', 'https://api20.tomkrok1.repl.co');
+//  res.setHeader('Access-Control-Allow-Origin', 'https://www.section.io');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 
 let categories = ['funnyJoke', 'lameJoke'];
 let funnyJoke = [
@@ -62,5 +74,6 @@ function getJokes(category) {
 }
 
 app.use(express.static('public'));
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
