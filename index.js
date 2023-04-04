@@ -48,7 +48,7 @@ app.get('/jokebook/joke/:category', function (req, res) {
   if(req.params['category'] === 'funnyJoke' || req.params['category'] === 'lameJoke') {
     res.json(getJokes(req.params['category']));
   } else {
-    res.status(400).json({'error': 'no category listed for ' + req.params['category']});
+    res.status(400).json({'error': 'no jokes for category ' + req.params['category']});
   }
 });
 
